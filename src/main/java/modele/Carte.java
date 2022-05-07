@@ -46,4 +46,12 @@ public class Carte {
         }
         return chaine;
     }
+
+    public Map<String,Integer> getVillesIndicés() {
+        return villesIndicé;
+    }
+
+    public Integer[][] getDistance() {
+        return distances;
+    }
 }

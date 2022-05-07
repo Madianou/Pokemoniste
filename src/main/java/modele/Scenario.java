@@ -52,9 +52,11 @@ public class Scenario {
     public List<String> getVendeurs() {
         return vendeurs ;
     }
+
     public List<String> getAcheteurs() {
         return acheteurs ;
     }
+
     public String toString() {
         return vendeurs + "\n" + acheteurs ;
     }

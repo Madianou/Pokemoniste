@@ -1,12 +1,9 @@
 package modele;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Membres {
 
@@ -33,6 +30,14 @@ public class Membres {
     }
 
     public String toString(){
-        return liste.toString();
+        String chaine= "";
+        for (Map.Entry mapentry : liste.entrySet()) {
+            chaine = chaine + mapentry.getKey() + " vit à " + mapentry.getValue() + "\n";
+        }
+        return chaine;
+    }
+
+    public  Map<String, String> getListe() {
+        return liste;
     }
 }
