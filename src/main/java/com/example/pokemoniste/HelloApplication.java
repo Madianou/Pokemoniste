@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import modele.Carte;
+import modele.GrapheOriente;
 import modele.Membres;
 import modele.Scenario;
 import vue.HBoxTest;
@@ -19,8 +20,8 @@ public class HelloApplication extends Application {
         Carte carte = new Carte();
         Membres membres = new Membres();
         Scenario scenario = Scenario.lectureScenario(new File("src/files/scenario/scenario_2_1.txt"));
-        System.out.println(carte);
-        System.out.println(scenario.toStringCommeFich());
+        GrapheOriente test = new GrapheOriente(scenario,carte,membres);
+        System.out.println(test);
         HBoxTest root = new HBoxTest();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(root, 320, 240);

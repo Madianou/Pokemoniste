@@ -19,7 +19,6 @@ public class HBoxTest extends HBox {
 
     public HBoxTest() throws IOException {
         Carte carte = new Carte();
-        System.out.println(carte);
         Scenario scenario = lectureScenario(new File("src/files/scenario/scenario_0.txt"));
         Membres membres = new Membres();
         TextArea txt = new TextArea();
