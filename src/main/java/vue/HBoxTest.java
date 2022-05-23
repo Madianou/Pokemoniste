@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import modele.Carte;
+import modele.GrapheOriente;
 import modele.Membres;
 import modele.Scenario;
 
@@ -21,8 +22,10 @@ public class HBoxTest extends HBox {
         Carte carte = new Carte();
         Scenario scenario = lectureScenario(new File("src/files/scenario/scenario_0.txt"));
         Membres membres = new Membres();
+        GrapheOriente g = new GrapheOriente(scenario,carte,membres);
         TextArea txt = new TextArea();
         TextArea txt2 = new TextArea();
+        TextArea txt3 = new TextArea();
 
         String chaine = "";
         for( int i = 0; i<scenario.getVendeurs().size();i++){
@@ -54,6 +57,7 @@ public class HBoxTest extends HBox {
                 Scenario scenario = null;
                 try {
                     scenario = lectureScenario(new File("src/files/scenario/"+fichierDeroulant.getValue()));
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -65,9 +69,15 @@ public class HBoxTest extends HBox {
                             +" km "+"\n";
                 }
                 txt2.setText(chaine);
+                GrapheOriente g2 = new GrapheOriente(scenario,carte,membres);
+                txt3.setText(g2.toString());
             }
         };
         fichierDeroulant.setOnAction(event);
+
+        txt3.setText(g.toString());
+        this.getChildren().add(txt3);
+
 
     }
 }
