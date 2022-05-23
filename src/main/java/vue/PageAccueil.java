@@ -1,4 +1,4 @@
-package vue;
+package Vue;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -33,7 +33,6 @@ public class PageAccueil extends VBox {
         chBouton.setAlignment(Pos.CENTER_RIGHT);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);
         boxBouton.getChildren().add(chBouton);
-
 
         this.getChildren().addAll(boxPokemon, boxBouton);
     }
