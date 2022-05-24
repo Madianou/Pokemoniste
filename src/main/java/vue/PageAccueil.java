@@ -8,6 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.net.URL;
+
 public class PageAccueil extends VBox {
     private static Image chImage;
     private static Button chBouton;
@@ -19,7 +22,7 @@ public class PageAccueil extends VBox {
 
         final ImageView imageView = new ImageView();
 
-        String url = "C:\\Users\\Raphaël\\Documents\\Ecole\\2e semestre\\Saé\\Saé Commune - Dev\\Pokemoniste\\images\\Pokemoniste.png";
+        String url = new File("images/Pokemoniste.png").toURI().toString();
         //Il faut changer le chemin pour pouvoir accéder à l'image.
 
         chImage = new Image(url);
