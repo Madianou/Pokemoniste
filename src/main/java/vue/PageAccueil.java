@@ -1,5 +1,8 @@
 package vue;
 
+import com.example.pokemoniste.HelloApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -32,6 +35,14 @@ public class PageAccueil extends VBox {
         boxPokemon.getChildren().add(imageView);
 
         chBouton = new Button("Accéder à l'application");
+        chBouton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("go");
+                HelloApplication.setRoot(new VBoxRoot());
+            }
+        });
+
         boxBouton.setAlignment(Pos.CENTER);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);
         boxBouton.getChildren().add(chBouton);

@@ -3,18 +3,17 @@ package vue;
 import javafx.scene.layout.VBox;
 
 public class VBoxRoot extends VBox {
-    private static PageAccueil chAccueil;
+    private static PagePrésentation chPrésetation;
 
     public VBoxRoot(){
 
+        chPrésetation = new PagePrésentation();
 
-        chAccueil = new PageAccueil();
-
-        this.getChildren().add(chAccueil);
+        this.getChildren().add(chPrésetation);
 
     }
-    public static PageAccueil getAccueil(){
-        return chAccueil;
+    public static PagePrésentation getPrésetation(){
+        return chPrésetation;
     }
 
 }
