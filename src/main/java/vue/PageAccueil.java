@@ -1,4 +1,4 @@
-package Vue;
+package vue;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,18 +19,18 @@ public class PageAccueil extends VBox {
 
         final ImageView imageView = new ImageView();
 
-        String url = "C:\\Users\\Raphaël\\Documents\\Ecole\\2e semestre\\Saé\\Saé Commune - Dev\\Pokemoniste\\Picture\\Pokemon.png";
+        String url = "C:\\Users\\Raphaël\\Documents\\Ecole\\2e semestre\\Saé\\Saé Commune - Dev\\Pokemoniste\\images\\Pokemoniste.png";
         //Il faut changer le chemin pour pouvoir accéder à l'image.
 
         chImage = new Image(url);
         imageView.setImage(chImage);
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(600);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(700);
 
         boxPokemon.getChildren().add(imageView);
 
         chBouton = new Button("Accéder à l'application");
-        chBouton.setAlignment(Pos.CENTER_RIGHT);
+        chBouton.setAlignment(Pos.CENTER);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);
         boxBouton.getChildren().add(chBouton);
 

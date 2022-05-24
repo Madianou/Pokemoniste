@@ -1,4 +1,4 @@
-package Vue;
+package vue;
 
 import javafx.scene.layout.VBox;
 

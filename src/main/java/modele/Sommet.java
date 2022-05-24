@@ -1,4 +1,4 @@
-package Modele;
+package modele;
 
 public class Sommet {
     private String ville;

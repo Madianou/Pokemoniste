@@ -1,19 +1,19 @@
-package Vue;
+package vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
-import Modele.Carte;
-import Modele.GrapheOriente;
-import Modele.Membres;
-import Modele.Scenario;
+import modele.Carte;
+import modele.GrapheOriente;
+import modele.Membres;
+import modele.Scenario;
 
 import java.io.File;
 import java.io.IOException;
 
-import static Modele.Scenario.lectureScenario;
+import static modele.Scenario.lectureScenario;
 
 public class HBoxTest extends HBox {
 

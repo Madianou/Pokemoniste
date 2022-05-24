@@ -1,14 +1,13 @@
 package com.example.pokemoniste;
 
-import Vue.VBoxRoot;
+import vue.VBoxRoot;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import Modele.Carte;
-import Modele.Membres;
-import Modele.Scenario;
-import Vue.PageAccueil;
+import modele.Carte;
+import modele.Membres;
+import modele.Scenario;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class HelloApplication extends Application {
         //System.out.println(test);
         VBoxRoot root = new VBoxRoot();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 700, 400);
         stage.setTitle("Page d'accueil");
         stage.setScene(scene);
         stage.show();
