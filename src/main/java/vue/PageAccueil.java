@@ -24,13 +24,12 @@ public class PageAccueil extends VBox {
 
         chImage = new Image(url);
         imageView.setImage(chImage);
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(700);
+        boxPokemon.setAlignment(Pos.CENTER);
 
         boxPokemon.getChildren().add(imageView);
 
         chBouton = new Button("Accéder à l'application");
-        chBouton.setAlignment(Pos.CENTER);
+        boxBouton.setAlignment(Pos.CENTER);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);
         boxBouton.getChildren().add(chBouton);
 
