@@ -91,6 +91,58 @@ public class GrapheOriente {
     }
 
 
+    public List<int[]> parcoursLargeur(Integer indiceDepart){
+        List liste = new ArrayList<int[]>();
+        Deque file = new ArrayDeque();
+        Map<Integer,ArrayList<Integer>> lAdjacence = adjacence;
+
+        // liste avec pred et dist
+
+        for (int i = 0; i<lAdjacence.size()-1;i++){
+            if (i == indiceDepart){
+                int [] tab = {-2,0};
+                liste.add(tab);
+                System.out.println(tab[0]+" " +tab[1] );
+            }
+            int [] tab = {-1,-1};
+            liste.add(tab);
+        }
+
+        file.addLast(indiceDepart);
+
+
+        while (!file.isEmpty()){
+            Integer courant = (Integer) file.removeFirst();
+            Iterator iterator = lAdjacence.get(courant).iterator();
+            while (iterator.hasNext()){
+                int indice = (int) iterator.next();
+                int[] tab = (int[]) liste.get(indice);
+                int[] tabCourant = (int[]) liste.get(courant);
+                if(-1 ==tab[1] ){
+                    tab[0] = courant;
+                    tab[1] =  tabCourant[1]+1;
+                    file.addLast(indice);
+                    System.out.println(tab[0]+" " +tab[1] );
+                }
+            }
+            System.out.println(file);
+        }
+        return liste;
+
+    }
+
+    public static String parcoursLargeurToString (List<int[]> liste){
+        String chaine = "";
+        int indice = 0;
+        for (int[] elem : liste ){
+            chaine = chaine + indice + " : pred=" + elem[0] + " dist=" + elem[1] + "\n";
+            indice++;
+        }
+        return chaine;
+
+    }
+
+
     @Override
     public String toString() {
         return "GrapheOriente{" +
