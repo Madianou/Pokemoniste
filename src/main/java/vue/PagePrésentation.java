@@ -1,13 +1,14 @@
 package vue;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
-public class PagePrésentation extends VBox {
+public class PagePrésentation extends HBox {
 
 
     public PagePrésentation(){
-        Label label = new Label("Testttttttt");
-        this.getChildren().add(label);
+        PagePrésentationGauche gauche = new PagePrésentationGauche();
+        PagePrésentationDroite droite = new PagePrésentationDroite();
+
+        this.getChildren().addAll(gauche,droite);
     }
 }

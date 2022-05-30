@@ -1,6 +1,5 @@
 package vue;
 
-import com.example.pokemoniste.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
