@@ -35,13 +35,6 @@ public class PageAccueil extends VBox {
         boxPokemon.getChildren().add(imageView);
 
         chBouton = new Button("Accéder à l'application");
-        chBouton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                System.out.println("go");
-                HelloApplication.setRoot(new VBoxRoot());
-            }
-        });
 
         boxBouton.setAlignment(Pos.CENTER);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);

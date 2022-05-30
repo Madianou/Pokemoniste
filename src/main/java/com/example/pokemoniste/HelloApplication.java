@@ -25,9 +25,14 @@ public class HelloApplication extends Application {
         Scenario scenario = Scenario.lectureScenario(new File("src/files/scenario/scenario_2_1.txt"));
         //GrapheOriente test = new GrapheOriente(scenario,carte,membres);
         //System.out.println(test);
-        chRoot = new PageAccueil();
+        chRoot = new VBoxRoot();
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         chScene = new Scene(chRoot, 700, 400);
+
+        File css = new File("css"+File.separator+"Styles.css");
+        chScene.getStylesheets().add(css.toURI().toString());
+
         stage.setTitle("Page d'accueil");
         stage.setScene(chScene);
         stage.show();
@@ -37,7 +42,7 @@ public class HelloApplication extends Application {
         launch();
     }
     public static void setRoot(VBox parBox){
-        chRoot = parBox;
+        chRoot = new VBoxRoot();
         chScene = new Scene(chRoot, 700, 400);
     }
 }
