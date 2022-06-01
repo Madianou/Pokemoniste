@@ -91,18 +91,17 @@ public class GrapheOriente {
     }
 
 
-    public List<int[]> parcoursLargeur(Integer indiceDepart){
+    public List<int[]> parcoursLargeur(Integer indiceDepart,Carte carte){
         List liste = new ArrayList<int[]>();
         Deque file = new ArrayDeque();
-        Map<Integer,ArrayList<Integer>> lAdjacence = adjacence;
+
 
         // liste avec pred et dist
 
-        for (int i = 0; i<lAdjacence.size()-1;i++){
+        for (int i = 0; i<adjacence.size();i++){
             if (i == indiceDepart){
                 int [] tab = {-2,0};
                 liste.add(tab);
-                System.out.println(tab[0]+" " +tab[1] );
             }
             int [] tab = {-1,-1};
             liste.add(tab);
@@ -110,22 +109,19 @@ public class GrapheOriente {
 
         file.addLast(indiceDepart);
 
-
         while (!file.isEmpty()){
             Integer courant = (Integer) file.removeFirst();
-            Iterator iterator = lAdjacence.get(courant).iterator();
+            Iterator iterator = adjacence.get(courant).iterator();
             while (iterator.hasNext()){
                 int indice = (int) iterator.next();
                 int[] tab = (int[]) liste.get(indice);
                 int[] tabCourant = (int[]) liste.get(courant);
                 if(-1 ==tab[1] ){
                     tab[0] = courant;
-                    tab[1] =  tabCourant[1]+1;
+                    tab[1] =  tabCourant[1]+carte.getDistance()[courant][indice];
                     file.addLast(indice);
-                    System.out.println(tab[0]+" " +tab[1] );
                 }
             }
-            System.out.println(file);
         }
         return liste;
 
@@ -134,6 +130,9 @@ public class GrapheOriente {
     public static String parcoursLargeurToString (List<int[]> liste){
         String chaine = "";
         int indice = 0;
+        if (liste==null){
+            return chaine;
+        }
         for (int[] elem : liste ){
             chaine = chaine + indice + " : pred=" + elem[0] + " dist=" + elem[1] + "\n";
             indice++;
@@ -141,6 +140,38 @@ public class GrapheOriente {
         return chaine;
 
     }
+
+
+    public String parcoursLargeurTotal(Carte carte){
+        List listPreDistFin = null;
+        for(Integer x: sommets.keySet()){
+            List listPredDist = this.parcoursLargeur(x,carte);
+
+            boolean flag = true;
+            for(int i = 0; i<listPredDist.size();i++){
+                int[] tab = (int[]) listPredDist.get(i);
+                if (-1 == tab[1]){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag){
+                listPreDistFin = listPredDist;
+                break;
+            }
+        }
+        return GrapheOriente.parcoursLargeurToString(listPreDistFin);
+    }
+
+    public void parcoursLargeurTotalComplet(Carte carte){
+        for(Integer x: sommets.keySet()){
+            List listPredDist = this.parcoursLargeur(x,carte);
+            System.out.println("Parcours pour "+x);
+            System.out.println(GrapheOriente.parcoursLargeurToString(listPredDist));
+            System.out.println("--------------------------------------------------------");
+            }
+        }
+
 
 
     @Override
