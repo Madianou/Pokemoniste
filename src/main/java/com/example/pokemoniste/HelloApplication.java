@@ -19,11 +19,12 @@ public class HelloApplication extends Application {
 
         Carte carte = new Carte();
         Membres membres = new Membres();
-        Scenario scenario = Scenario.lectureScenario(new File("src/files/scenario/scenario_2_2.txt"));
+        Scenario scenario = Scenario.lectureScenario(new File("src/files/scenario/scenario_0.txt"));
         GrapheOriente test = new GrapheOriente(scenario,carte,membres);
         System.out.println(test);
-        test.parcoursLargeurTotalComplet(carte);
+        //test.parcoursLargeurTotalComplet(carte);
         //System.out.println(test.PlusCourtChemin(0,23,carte));
+        System.out.println(test.sourceEnSource(carte));
 
         VBoxRoot root = new VBoxRoot();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
