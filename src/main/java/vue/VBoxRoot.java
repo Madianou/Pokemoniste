@@ -1,6 +1,5 @@
 package vue;
 
-import com.example.pokemoniste.HelloApplication;
 import controleur.Controleur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -52,15 +51,17 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
             chScenarioItem = new MenuItem(MENU_FICHIERS[i]);
             chScenarioItem.setUserData(i);
 
+            chScenarioItem.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent actionEvent){
+                    ApplicationPokemoniste.setUrlScenario(getScenario());
+                    System.out.println("go");
+                }
+            });
+
             chScenario.getItems().add(chScenarioItem);
         }
-        chScenarioItem.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent actionEvent){
-                HelloApplication.setUrlScenario(getScenario());
-                System.out.println("go");
-            }
-        });
+
 
         for (int y=0; y< MENU_PAGES.length; y++){
             MenuItem menuItem2 = new MenuItem(MENU_PAGES[y]);

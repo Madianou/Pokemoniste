@@ -5,6 +5,6 @@ module com.example.pokemoniste {
     requires org.controlsfx.controls;
     requires com.gluonhq.maps;
 
-    opens com.example.pokemoniste to javafx.fxml;
-    exports com.example.pokemoniste;
+    opens vue to javafx.fxml;
+    exports vue;
 }
