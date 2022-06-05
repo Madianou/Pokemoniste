@@ -4,10 +4,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 
 public class ApplicationPokemoniste extends Application {
 
-    public void start (Stage stage){
+    public void start (Stage stage) throws IOException {
         VBoxRoot root = new VBoxRoot();
         Scene scene = new Scene(root,500, 500);
 
@@ -20,6 +21,6 @@ public class ApplicationPokemoniste extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

@@ -1,5 +1,7 @@
 package vue;
 
+import com.example.pokemoniste.HelloApplication;
+import controleur.Controleur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -11,40 +13,54 @@ import javafx.scene.layout.VBox;
 import modele.ConstantesPokemoniste;
 
 public class VBoxRoot extends VBox implements ConstantesPokemoniste{
-    private static PagePrésentation chPrésetation;
+    private static Controleur chControleur;
+    private static PagePrésentation chPrésentation;
     private static PageMembre chMembre;
     private static PageFrance chFrance;
+    private static Menu chScenario;
+    private static Menu chPage;
+    private static MenuItem chScenarioItem;
+    private static MenuItem chPageItem;
 
     public VBoxRoot(){
-        chPrésetation = new PagePrésentation();
+        chControleur = new Controleur();
+
+        chPrésentation = new PagePrésentation();
         chMembre = new PageMembre();
         chFrance = new PageFrance();
 
         MenuBar bar = new MenuBar();
-        Menu menuFichier = new Menu("Selection des fichiers");
-        Menu menuPage = new Menu("Selection des pages");
-        bar.getMenus().addAll(menuFichier,menuPage);
+        chScenario = new Menu("Selection des fichiers");
+        chPage = new Menu("Selection des pages");
+        bar.getMenus().addAll(chScenario,chPage);
 
         Node [] components = new Node[3];
-        components[0] = chPrésetation;
-        chPrésetation.setId("opaque");
+        components[0] = chPrésentation;
+        chPrésentation.setId("opaque");
         components[1] = chMembre;
         chMembre.setId("opaque");
         components[2] = chFrance;
         chFrance.setId("opaque");
 
-        this.getChildren().add(chPrésetation);
+        this.getChildren().add(chPrésentation);
 
         StackPane stackPane = new StackPane(components);
         stackPane.getChildren().get(0).toFront();
 
 
         for (int i=0; i < MENU_FICHIERS.length; i++) {
-            MenuItem menuItem1 = new MenuItem(MENU_FICHIERS[i]);
-            menuItem1.setUserData(i);
+            chScenarioItem = new MenuItem(MENU_FICHIERS[i]);
+            chScenarioItem.setUserData(i);
 
-            menuFichier.getItems().add(menuItem1);
+            chScenario.getItems().add(chScenarioItem);
         }
+        chScenarioItem.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent){
+                HelloApplication.setUrlScenario(getScenario());
+                System.out.println("go");
+            }
+        });
 
         for (int y=0; y< MENU_PAGES.length; y++){
             MenuItem menuItem2 = new MenuItem(MENU_PAGES[y]);
@@ -60,13 +76,20 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
                     }
                 }
             });
-            menuPage.getItems().add(menuItem2);
+            chPage.getItems().add(menuItem2);
         }
 
         this.getChildren().addAll(bar,stackPane);
     }
     public static PagePrésentation getPresetation(){
-        return chPrésetation;
+        return chPrésentation;
+    }
+    public static String getScenario(){
+        String url = URL_SCENARIO[(int) chScenarioItem.getUserData()];
+        return url;
+    }
+    public static Controleur getControleur(){
+        return chControleur;
     }
 
 }

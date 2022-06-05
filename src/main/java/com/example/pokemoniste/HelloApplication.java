@@ -1,7 +1,6 @@
 package com.example.pokemoniste;
 
 import javafx.scene.layout.VBox;
-import vue.PageAccueil;
 import vue.VBoxRoot;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,21 +13,25 @@ import modele.Scenario;
 import java.io.File;
 import java.io.IOException;
 
+import static modele.ConstantesPokemoniste.URL_SCENARIO;
+
 public class HelloApplication extends Application {
     private static VBox chRoot;
     private static Scene chScene;
+    private static String chUrlScenario = URL_SCENARIO[0];
     @Override
     public void start(Stage stage) throws IOException {
+        System.setProperty("http.agent", "Gluon Mobile/1.0.3");
 
         Carte carte = new Carte();
         Membres membres = new Membres();
-        Scenario scenario = Scenario.lectureScenario(new File("src/files/scenario/scenario_2_1.txt"));
+        Scenario scenario = Scenario.lectureScenario(new File(chUrlScenario));
         //GrapheOriente test = new GrapheOriente(scenario,carte,membres);
         //System.out.println(test);
         chRoot = new VBoxRoot();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        chScene = new Scene(chRoot, 700, 400);
+        chScene = new Scene(chRoot, 1280, 720);
 
         File css = new File("css"+File.separator+"Styles.css");
         chScene.getStylesheets().add(css.toURI().toString());
@@ -44,5 +47,8 @@ public class HelloApplication extends Application {
     public static void setRoot(VBox parBox){
         chRoot = new VBoxRoot();
         chScene = new Scene(chRoot, 700, 400);
+    }
+    public static void setUrlScenario(String string){
+        chUrlScenario = string;
     }
 }
