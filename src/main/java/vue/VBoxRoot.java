@@ -50,18 +50,15 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
         for (int i=0; i < MENU_FICHIERS.length; i++) {
             chScenarioItem = new MenuItem(MENU_FICHIERS[i]);
             chScenarioItem.setUserData(i);
-
             chScenarioItem.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent){
-                    ApplicationPokemoniste.setUrlScenario(getScenario());
-                    System.out.println("go");
+                    ApplicationPokemoniste.setUrlScenario(getIndiceScenario());
+                    //System.out.println("go");
                 }
             });
-
             chScenario.getItems().add(chScenarioItem);
         }
-
 
         for (int y=0; y< MENU_PAGES.length; y++){
             MenuItem menuItem2 = new MenuItem(MENU_PAGES[y]);
@@ -82,12 +79,17 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
 
         this.getChildren().addAll(bar,stackPane);
     }
+
     public static PagePrésentation getPresetation(){
         return chPrésentation;
     }
     public static String getScenario(){
-        String url = URL_SCENARIO[(int) chScenarioItem.getUserData()];
+        String url = MENU_FICHIERS[(int) chScenarioItem.getUserData()];
         return url;
+    }
+    public static int getIndiceScenario(){
+        int indice = (int) chScenarioItem.getUserData();
+        return indice;
     }
     public static Controleur getControleur(){
         return chControleur;

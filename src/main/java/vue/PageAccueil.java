@@ -18,6 +18,7 @@ public class PageAccueil extends VBox {
     private static Button chBouton;
 
     public PageAccueil(){
+        this.setSpacing(10);
 
         HBox boxPokemon = new HBox(10);
         HBox boxBouton = new HBox(10);
