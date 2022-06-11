@@ -188,7 +188,7 @@ public class GrapheOriente {
         }
 
 
-    public List<Integer> sourceEnSource(Carte carte){
+    public List<Integer> sourceEnSource(List<Integer> source,Map<Integer,Integer> degréEntrant,Carte carte){
 
         /**
             Fait un parcours de source en source et retourne qu'une seule solution ( pas forcément la meilleure ).
@@ -201,9 +201,9 @@ public class GrapheOriente {
         Deque file = new ArrayDeque(sourceTemp);
         List<Integer> chemin = new ArrayList<>();
         Integer origine = sourceTemp.remove(0);
-        dist = dist + carte.getDistance()[28][origine];
+        dist+= carte.getDistance()[28][origine];
         for (Integer x : sourceTemp){
-            dist = dist + carte.getDistance()[origine][x];
+            dist += carte.getDistance()[origine][x];
             origine = x;
         }
 
@@ -216,16 +216,76 @@ public class GrapheOriente {
                 Integer v = (Integer) iterator.next();
                 degréE.put(v,degréE.get(v)-1);
                 if (degréE.get(v) == 0){  /** On trouve une nouvelle source et on l'ajoute dans la file **/
-                    dist =dist + carte.getDistance()[courant][v];
+                    dist+= carte.getDistance()[courant][v];
                     file.addLast(v);
                 }
             }
             if (file.isEmpty()){
-                dist = dist + carte.getDistance()[28][courant];
+                dist +=  carte.getDistance()[28][courant];
             }
         }
         chemin.add(dist);
         return chemin;
+    }
+
+
+
+    public List<List<Integer>> sourceComplet(Integer origine,List<List<Integer>> chemins,List<Integer> source,Map<Integer,Integer> degréEntrant,Carte carte,Integer dist){
+
+        if (!source.isEmpty()) {
+            if (source.size()>1){
+                for (Integer s : source){
+                    List <Integer> sourceTemp = new ArrayList<>(source);
+                    HashMap<Integer, Integer> degreE = new HashMap<Integer,Integer>(degréEntrant);
+                    sourceTemp.remove(s);
+                    Iterator iterator = adjacence.get(s).iterator();
+                    while(iterator.hasNext()){
+                        Integer v = (Integer) iterator.next();
+                        degreE.put(v,degreE.get(v)-1);
+                        if (degreE.get(v) == 0){
+                            sourceTemp.add(v);
+                        }
+                        dist = carte.getDistance()[28][s];
+                    }
+                    sourceComplet(s,chemins,sourceTemp,degreE,carte,dist);
+                }
+            }
+            else{
+
+                List<Integer> sourceTemp = source;
+                Map<Integer,Integer> degréE =  degréEntrant;
+                Integer debut = sourceTemp.get(0);
+                List<Integer> chemin = new ArrayList<>();
+                chemin.add(debut);
+                Deque file = new ArrayDeque(sourceTemp);
+                dist+= carte.getDistance()[origine][debut];
+
+                System.out.println(dist);
+
+
+                while(!file.isEmpty()){
+                    Integer courant = (Integer) file.removeFirst();
+                    chemin.add(courant);
+                    Iterator iterator = adjacence.get(courant).iterator();
+                    while(iterator.hasNext()){  /** On diminue les degrés entrants de tous les voisins de courant car on "l'élimine" du graphe **/
+                        Integer v = (Integer) iterator.next();
+                        degréE.put(v,degréE.get(v)-1);
+                        if (degréE.get(v) == 0){  /** On trouve une nouvelle source et on l'ajoute dans la file **/
+                            dist+= carte.getDistance()[courant][v];
+                            file.addLast(v);
+                        }
+                    }
+                    if (file.isEmpty()){
+                        dist +=  carte.getDistance()[28][courant];
+                    }
+                }
+                chemin.add(dist);
+                chemins.add(chemin);
+            }
+
+        }
+
+        return chemins;
     }
 
 
@@ -244,5 +304,13 @@ public class GrapheOriente {
                 ", degré entrant min="+ degréMinE +"\n" +
                 ",degré sortant min=" + degréMinS +
                 '}';
+    }
+
+    public List<Integer> getSource() {
+        return source;
+    }
+
+    public Map<Integer, Integer> getDegreEntrant() {
+        return degréEntrant;
     }
 }
