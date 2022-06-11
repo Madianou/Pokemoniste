@@ -1,5 +1,7 @@
 package vue;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -16,6 +18,7 @@ public class PageAccueil extends VBox {
     private static Button chBouton;
 
     public PageAccueil(){
+        this.setSpacing(10);
 
         HBox boxPokemon = new HBox(10);
         HBox boxBouton = new HBox(10);
@@ -32,6 +35,7 @@ public class PageAccueil extends VBox {
         boxPokemon.getChildren().add(imageView);
 
         chBouton = new Button("Accéder à l'application");
+
         boxBouton.setAlignment(Pos.CENTER);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);
         boxBouton.getChildren().add(chBouton);
