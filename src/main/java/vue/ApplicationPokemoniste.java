@@ -3,8 +3,7 @@ package vue;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import modele.ConstantesPokemoniste;
-import modele.Scenario;
+import modele.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +24,10 @@ public class ApplicationPokemoniste extends Application implements ConstantesPok
         scene.getStylesheets().add(css.toURI().toString());
 
         Scenario scenario = Scenario.lectureScenario(new File(chUrlScenario));
+        Carte carte = new Carte();
+        Membres membres = new Membres();
+        GrapheOriente test = new GrapheOriente(scenario,carte,membres);
+        System.out.println(test);
 
         stage.setScene(scene);
         stage.setTitle("Pokemoniste");
