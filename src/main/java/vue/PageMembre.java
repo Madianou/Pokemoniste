@@ -16,7 +16,9 @@ public class PageMembre extends HBox implements ConstantesPokemoniste {
         this.setSpacing(ESPACEMENT);
 
         VBox VBoxGauche = new VBox();
+        VBoxGauche.setSpacing(ESPACEMENT);
         VBox VBoxDroite = new VBox();
+        VBoxDroite.setSpacing(ESPACEMENT);
 
         chArea = new TextArea();
         VBoxGauche.getChildren().add(chArea);
@@ -27,5 +29,9 @@ public class PageMembre extends HBox implements ConstantesPokemoniste {
 
         this.getChildren().addAll(VBoxGauche, VBoxDroite);
 
+    }
+    public void setMembres(String membres){
+        chArea.clear();
+        chArea.setText(membres);
     }
 }

@@ -56,6 +56,56 @@ public class Scenario {
     public List<String> getAcheteurs() {
         return acheteurs ;
     }
+    public String getMembresString(){
+        ArrayList <String> membres = new ArrayList<>();
+
+        for (String membre : acheteurs){
+            if (membres.contains(membre)){
+                System.out.println("3");
+            }
+            else {
+                membres.add(membre);
+                System.out.println("1");
+            }
+        }
+        for (String personne : vendeurs){
+            if (membres.contains(personne)){
+                System.out.println("4");
+            }
+            else {
+                membres.add(personne);
+                System.out.println("2");
+            }
+        }
+        String chaine = "";
+        for (String gens : membres) {
+            chaine = chaine + gens + "\n";
+        }
+        return chaine;
+    }
+    public List<String> getMembresListe(){
+        ArrayList <String> membres = new ArrayList<>();
+
+        for (String membre : acheteurs){
+            if (membres.contains(membre)){
+                System.out.println("3");
+            }
+            else {
+                membres.add(membre);
+                System.out.println("1");
+            }
+        }
+        for (String personne : vendeurs){
+            if (membres.contains(personne)){
+                System.out.println("4");
+            }
+            else {
+                membres.add(personne);
+                System.out.println("2");
+            }
+        }
+        return membres;
+    }
 
     public String toString() {
         return vendeurs + "\n" + acheteurs ;

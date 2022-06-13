@@ -11,6 +11,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import modele.ConstantesPokemoniste;
 
+import java.io.IOException;
+
 public class VBoxRoot extends VBox implements ConstantesPokemoniste{
     private static Controleur chControleur;
     private static PagePrésentation chPrésentation;
@@ -21,9 +23,8 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
     private static MenuItem chScenarioItem;
     private static MenuItem chPageItem;
 
-    public VBoxRoot(){
+    public VBoxRoot() throws IOException {
         chControleur = new Controleur();
-
         chPrésentation = new PagePrésentation();
         chMembre = new PageMembre();
         chFrance = new PageFrance();
@@ -50,13 +51,7 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
         for (int i=0; i < MENU_FICHIERS.length; i++) {
             chScenarioItem = new MenuItem(MENU_FICHIERS[i]);
             chScenarioItem.setUserData(i);
-            chScenarioItem.setOnAction(new EventHandler<ActionEvent>(){
-                @Override
-                public void handle(ActionEvent actionEvent){
-                    ApplicationPokemoniste.setUrlScenario(getIndiceScenario());
-                    //System.out.println("go");
-                }
-            });
+            chScenarioItem.setOnAction(chControleur);
             chScenario.getItems().add(chScenarioItem);
         }
 
@@ -82,6 +77,12 @@ public class VBoxRoot extends VBox implements ConstantesPokemoniste{
 
     public static PagePrésentation getPresetation(){
         return chPrésentation;
+    }
+    public static PageMembre getMembre(){
+        return chMembre;
+    }
+    public static PageFrance getFrance(){
+        return chFrance;
     }
     public static String getScenario(){
         String url = MENU_FICHIERS[(int) chScenarioItem.getUserData()];

@@ -2,15 +2,31 @@ package controleur;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import vue.ApplicationPokemoniste;
-import vue.VBoxRoot;
+import modele.ConstantesPokemoniste;
+import vue.*;
 
-public class Controleur implements EventHandler {
+import java.io.IOException;
+
+public class Controleur implements EventHandler, ConstantesPokemoniste {
+    private static String chUrlScenario = URL_SCENARIO[0];
 
     @Override
     public void handle(Event event) {
+        PagePrésentation presentation = VBoxRoot.getPresetation();
+        PageMembre membre = VBoxRoot.getMembre();
+        PageFrance france = VBoxRoot.getFrance();
+
+        if (event.getSource() instanceof MenuItem){
+            chUrlScenario = URL_SCENARIO[(int) ((MenuItem) event.getSource()).getUserData()];
+            try {
+                presentation.setUrlScenario(chUrlScenario);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(presentation.getScenario());
+            membre.setMembres(presentation.getScenario().getMembresString());
+        }
 
     }
 }
