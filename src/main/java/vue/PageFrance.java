@@ -42,22 +42,14 @@ public class PageFrance extends HBox implements ConstantesPokemoniste {
         this.setHgrow(VBoxGauche, Priority.ALWAYS);
 
         chMap = doMap((ArrayList<String>) chScenario.getMembresListe());
-
-        //test avec toutes les villes
-        //for (int i=0; i < POINT_VILLE.length; i++){
-        //    MapPoint mapPoint = new MapPoint(POINT_VILLE[i][0],POINT_VILLE[i][1]);
-        //    MapLayer mapLayer = new PointCarte(mapPoint);
-        //    mapView.addLayer(mapLayer);
-        //}
-
         MapPoint mapPoint = new MapPoint(47.337710, 2.030016);
         chMap.setZoom((5.9));
         chMap.flyTo(0,mapPoint,0.1);
-
         VBoxDroite.getChildren().add(chMap);
 
         this.getChildren().addAll(VBoxGauche, VBoxDroite);
     }
+
     public static void setUrlScenario(String url) throws IOException {
         chUrlScenario = url;
         System.out.println(chUrlScenario);

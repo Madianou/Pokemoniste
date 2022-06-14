@@ -1,12 +1,13 @@
 package vue;
 
+import controleur.Controleur;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import modele.ConstantesPokemoniste;
 import modele.Scenario;
 
@@ -23,7 +24,7 @@ public class PagePrésentation extends HBox implements ConstantesPokemoniste {
 
     public PagePrésentation() throws IOException {
         this.setSpacing(ESPACEMENT);
-
+        Controleur controleur = VBoxRoot.getControleur();
         chScenario = Scenario.lectureScenario(new File(chUrlScenario));
 
         VBox VBoxGauche = new VBox();
@@ -42,6 +43,8 @@ public class PagePrésentation extends HBox implements ConstantesPokemoniste {
 
         HBox bouton = new HBox();
         chBouton = new Button("Bouton vers France");
+        chBouton.setId("France");
+        chBouton.setOnAction(controleur);
         bouton.getChildren().add(chBouton);
         bouton.setAlignment(Pos.CENTER);
         bouton.setHgrow(chBouton, Priority.ALWAYS);

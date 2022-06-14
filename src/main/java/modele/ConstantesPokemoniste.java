@@ -10,6 +10,9 @@ public interface ConstantesPokemoniste {
     final int TAILLE_POINT = 5;
     final int LARGEUR = 1200;
     final int HAUTEUR = 600;
+    final String ACHETEUR = "Les acheteurs sont : " + "\n" + "\n";
+    final String VENDEUR = "Les vendeurs sont : " + "\n" + "\n";
+    final String MEMBRE = "Les membres sont : " + "\n" + "\n";
     final double [][] POINT_VILLE = {
             {49.89419376232875, 2.2950926602671182},
             {47.47154546802486, -0.5476731980218175},

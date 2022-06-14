@@ -5,6 +5,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import modele.ConstantesPokemoniste;
+import modele.Scenario;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class PageMembre extends HBox implements ConstantesPokemoniste {
@@ -12,7 +16,7 @@ public class PageMembre extends HBox implements ConstantesPokemoniste {
     public static TextArea chVendeur;
     public static TextArea chArea;
 
-    public PageMembre(){
+    public PageMembre() throws IOException {
         this.setSpacing(ESPACEMENT);
 
         VBox VBoxGauche = new VBox();
@@ -20,13 +24,18 @@ public class PageMembre extends HBox implements ConstantesPokemoniste {
         VBox VBoxDroite = new VBox();
         VBoxDroite.setSpacing(ESPACEMENT);
 
-        chArea = new TextArea();
+        Scenario scenario = Scenario.lectureScenario(new File(URL_SCENARIO[0]));
+        String membresInit = scenario.getMembresString();
+
+        chArea = new TextArea(MEMBRE + membresInit);
         chArea.setMinWidth(LARGEUR/2);
         chArea.setMinHeight(HAUTEUR+10);
         VBoxGauche.getChildren().add(chArea);
 
         chAcheteur = new TextArea();
+        chAcheteur.setText(ACHETEUR + scenario.getAcheteursString());
         chVendeur = new TextArea();
+        chVendeur.setText(VENDEUR + scenario.getVendeursString());
         chAcheteur.setMinWidth(LARGEUR/2);
         chAcheteur.setMinHeight(HAUTEUR/2);
         chVendeur.setMinWidth(LARGEUR/2);
@@ -36,8 +45,12 @@ public class PageMembre extends HBox implements ConstantesPokemoniste {
         this.getChildren().addAll(VBoxGauche, VBoxDroite);
 
     }
-    public void setMembres(String membres){
+    public void setMembres(String membres, String acheteurs, String vendeurs){
         chArea.clear();
-        chArea.setText(membres);
+        chAcheteur.clear();
+        chVendeur.clear();
+        chArea.setText(MEMBRE + membres);
+        chAcheteur.setText(ACHETEUR + acheteurs);
+        chVendeur.setText(VENDEUR + vendeurs);
     }
 }

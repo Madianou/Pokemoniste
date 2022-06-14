@@ -39,8 +39,8 @@ public class GrapheOriente {
         degréSortant = new HashMap<>();
 
 
-        List<String> departs = scenario.getVendeurs();
-        List<String> arrivés = scenario.getAcheteurs();
+        List<String> departs = scenario.getAllVendeurs();
+        List<String> arrivés = scenario.getAllAcheteurs();
         Map<String, String> membres = membre.getListe();
         Map<String,Integer> IndiceVille = carte.getVillesIndicés();
 
