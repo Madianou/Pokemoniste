@@ -5,3 +5,24 @@
 #opaque{
     -fx-background-color: white;
 }
+.scroll-pane{
+    -fx-border-color: white;
+}
+.toggle-button{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 1.6em;
+}
+.toggle-button:selected{
+    -fx-background-color:  #d2d2d9;
+}
+.toggle-button:hover{
+    -fx-background-color: #e8e8ea;
+}
+.label{
+    -fx-font-weight: bold;
+    -fx-font-size: 1.6em;
+}
+.text-area{
+    -fx-font-size: 1.4em;
+}

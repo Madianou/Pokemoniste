@@ -26,10 +26,11 @@ public class PagePrésentation extends HBox implements ConstantesPokemoniste {
 
         chScenario = Scenario.lectureScenario(new File(chUrlScenario));
 
-
         VBox VBoxGauche = new VBox();
+        VBoxGauche.setMinWidth(LARGEUR/2);
         VBoxGauche.setSpacing(ESPACEMENT);
         VBox VBoxDroite = new VBox();
+        VBoxDroite.setMinWidth(LARGEUR/2);
         VBoxDroite.setSpacing(ESPACEMENT);
 
         chCheminBref = new TextArea();

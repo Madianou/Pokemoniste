@@ -26,8 +26,15 @@ public class Controleur implements EventHandler, ConstantesPokemoniste {
             }
             System.out.println(presentation.getScenario());
             membre.setMembres(presentation.getScenario().getMembresString());
+            try {
+                System.out.println("1");
+                france.setUrlScenario(chUrlScenario);
+                france.setScenario(presentation.getScenario());
+                System.out.println("2");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-
     }
 }
 

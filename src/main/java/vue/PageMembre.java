@@ -21,10 +21,16 @@ public class PageMembre extends HBox implements ConstantesPokemoniste {
         VBoxDroite.setSpacing(ESPACEMENT);
 
         chArea = new TextArea();
+        chArea.setMinWidth(LARGEUR/2);
+        chArea.setMinHeight(HAUTEUR+10);
         VBoxGauche.getChildren().add(chArea);
 
         chAcheteur = new TextArea();
         chVendeur = new TextArea();
+        chAcheteur.setMinWidth(LARGEUR/2);
+        chAcheteur.setMinHeight(HAUTEUR/2);
+        chVendeur.setMinWidth(LARGEUR/2);
+        chVendeur.setMinHeight(HAUTEUR/2);
         VBoxDroite.getChildren().addAll(chAcheteur, chVendeur);
 
         this.getChildren().addAll(VBoxGauche, VBoxDroite);

@@ -61,20 +61,16 @@ public class Scenario {
 
         for (String membre : acheteurs){
             if (membres.contains(membre)){
-                System.out.println("3");
             }
             else {
                 membres.add(membre);
-                System.out.println("1");
             }
         }
         for (String personne : vendeurs){
             if (membres.contains(personne)){
-                System.out.println("4");
             }
             else {
                 membres.add(personne);
-                System.out.println("2");
             }
         }
         String chaine = "";
@@ -88,20 +84,16 @@ public class Scenario {
 
         for (String membre : acheteurs){
             if (membres.contains(membre)){
-                System.out.println("3");
             }
             else {
                 membres.add(membre);
-                System.out.println("1");
             }
         }
         for (String personne : vendeurs){
             if (membres.contains(personne)){
-                System.out.println("4");
             }
             else {
                 membres.add(personne);
-                System.out.println("2");
             }
         }
         return membres;
