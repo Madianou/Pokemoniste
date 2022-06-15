@@ -1,6 +1,8 @@
 package vue;
 
 import com.gluonhq.maps.MapLayer;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
@@ -24,44 +26,46 @@ public class PageFrance extends HBox implements ConstantesPokemoniste {
     private static TilePane chTilePane;
     private static MapView chMap;
     private static Carte chVille;
+    private static VBox VBoxGauche;
+    private static VBox VBoxDroite;
 
     public PageFrance() throws IOException {
-        VBox VBoxGauche = new VBox();
+        VBoxGauche = new VBox();
         VBoxGauche.setSpacing(ESPACEMENT);
         VBoxGauche.setMinWidth(LARGEUR/2);
-        VBox VBoxDroite = new VBox();
+        VBoxDroite = new VBox();
         VBoxDroite.setSpacing(ESPACEMENT);
-        VBoxDroite.setMaxWidth(LARGEUR/2);
+        VBoxDroite.setMinWidth(LARGEUR/2);
 
         chVille = new Carte();
         chScenario = Scenario.lectureScenario(new File(chUrlScenario));
 
-        chTilePane = doTilePane(chUrlScenario);
+        doTilePane(chUrlScenario);
         chTilePane.setPrefColumns(4);
-        VBoxGauche.getChildren().add(chTilePane);
         this.setHgrow(VBoxGauche, Priority.ALWAYS);
 
-        chMap = doMap((ArrayList<String>) chScenario.getMembresListe());
-        MapPoint mapPoint = new MapPoint(47.337710, 2.030016);
-        chMap.setZoom((5.9));
-        chMap.flyTo(0,mapPoint,0.1);
-        VBoxDroite.getChildren().add(chMap);
+        doMap((ArrayList<String>) chScenario.getMembresListe());
+
 
         this.getChildren().addAll(VBoxGauche, VBoxDroite);
     }
 
     public static void setUrlScenario(String url) throws IOException {
         chUrlScenario = url;
-        System.out.println(chUrlScenario);
+        System.out.println(chScenario);
+        chScenario = Scenario.lectureScenario(new File(url));
+        System.out.println(chScenario);
+        doTilePane(chUrlScenario);
     }
-    public static void setScenario(Scenario scenario) throws IOException {
-        chScenario = scenario;
-        chTilePane = doTilePane(chUrlScenario);
-        chMap = doMap((ArrayList<String>) chScenario.getMembresListe());
+    public static void setchScenario(Scenario scenario) throws IOException {
+        doMap((ArrayList<String>) chScenario.getMembresListe());
     }
-    public static TilePane doTilePane(String url) throws IOException {
-        System.out.println("3");
+    public static void doTilePane(String url) throws IOException {
+        VBoxGauche.getChildren().remove(chTilePane);
         TilePane tilePane = new TilePane();
+        tilePane.setAlignment(Pos.TOP_CENTER);
+        tilePane.setHgap(ESPACEMENT);
+        tilePane.setVgap(ESPACEMENT);
         ToggleGroup toggleGroup = new ToggleGroup();
         Scenario scenario = Scenario.lectureScenario(new File(url));
 
@@ -71,24 +75,26 @@ public class PageFrance extends HBox implements ConstantesPokemoniste {
             bouton.setToggleGroup(toggleGroup);
             tilePane.getChildren().add(bouton);
         }
-        return tilePane;
+        chTilePane = tilePane;
+        VBoxGauche.getChildren().add(chTilePane);
     }
-    public static MapView doMap(ArrayList<String> liste) throws IOException {
-        System.out.println("4");
+    public static void doMap(ArrayList<String> liste) throws IOException {
+        VBoxDroite.getChildren().remove(chMap);
         MapView mapView = new MapView();
         Membres gens = new Membres();
         Map ville = gens.getListe();
 
         for (String membre : liste){
-            System.out.println(chVille.getVillesIndicés());
-
             Double x = POINT_VILLE[chVille.getVillesIndicés().get(ville.get(membre))][0];
             Double y = POINT_VILLE[chVille.getVillesIndicés().get(ville.get(membre))][1];
             MapPoint mapPoint = new MapPoint(x,y);
             MapLayer mapLayer = new PointCarte(mapPoint);
             mapView.addLayer(mapLayer);
         }
-        System.out.println("5");
-        return mapView;
+        MapPoint mapPoint = new MapPoint(47.337710, 1.9);
+        mapView.setZoom((6.1));
+        mapView.flyTo(0,mapPoint,0.1);
+        chMap = mapView;
+        VBoxDroite.getChildren().add(chMap);
     }
 }
