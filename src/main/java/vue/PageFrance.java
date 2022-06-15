@@ -46,18 +46,13 @@ public class PageFrance extends HBox implements ConstantesPokemoniste {
 
         doMap((ArrayList<String>) chScenario.getMembresListe());
 
-
         this.getChildren().addAll(VBoxGauche, VBoxDroite);
     }
 
     public static void setUrlScenario(String url) throws IOException {
         chUrlScenario = url;
-        System.out.println(chScenario);
         chScenario = Scenario.lectureScenario(new File(url));
-        System.out.println(chScenario);
         doTilePane(chUrlScenario);
-    }
-    public static void setchScenario(Scenario scenario) throws IOException {
         doMap((ArrayList<String>) chScenario.getMembresListe());
     }
     public static void doTilePane(String url) throws IOException {

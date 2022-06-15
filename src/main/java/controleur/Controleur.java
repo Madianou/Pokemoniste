@@ -23,19 +23,12 @@ public class Controleur implements EventHandler, ConstantesPokemoniste {
             chUrlScenario = URL_SCENARIO[(int) ((MenuItem) event.getSource()).getUserData()];
             try {
                 presentation.setUrlScenario(chUrlScenario);
+                france.setUrlScenario(chUrlScenario);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             System.out.println(presentation.getScenario());
             membre.setMembres(presentation.getScenario().getMembresString(), presentation.getScenario().getAcheteursString(), presentation.getScenario().getVendeursString());
-            try {
-                System.out.println("1");
-                france.setUrlScenario(chUrlScenario);
-                france.setchScenario(presentation.getScenario());
-                System.out.println("2");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
         if (event.getSource() instanceof Button){
             if (((Button) event.getSource()).getId().equals("Accueil")){
