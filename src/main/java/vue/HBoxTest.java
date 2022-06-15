@@ -27,10 +27,10 @@ public class HBoxTest extends HBox {
         TextArea txt3 = new TextArea();
 
         String chaine = "";
-        for( int i = 0; i<scenario.getVendeurs().size();i++){
-            chaine = chaine + scenario.getVendeurs().get(i) + " -> " + scenario.getAcheteurs().get(i)
-                    + " | "+membres.getListe().get(scenario.getVendeurs().get(i))+ " -> " +membres.getListe().get(scenario.getAcheteurs().get(i))
-                    +" : "+ carte.getDistance()[carte.getVillesIndicés().get(membres.getListe().get(scenario.getVendeurs().get(i)))][carte.getVillesIndicés().get(membres.getListe().get(scenario.getAcheteurs().get(i)))]
+        for(int i = 0; i<scenario.getAllVendeurs().size(); i++){
+            chaine = chaine + scenario.getAllVendeurs().get(i) + " -> " + scenario.getAllAcheteurs().get(i)
+                    + " | "+membres.getListe().get(scenario.getAllVendeurs().get(i))+ " -> " +membres.getListe().get(scenario.getAllAcheteurs().get(i))
+                    +" : "+ carte.getDistance()[carte.getVillesIndicés().get(membres.getListe().get(scenario.getAllVendeurs().get(i)))][carte.getVillesIndicés().get(membres.getListe().get(scenario.getAllAcheteurs().get(i)))]
                     +" km "+"\n";
         }
         txt2.setText(chaine);
@@ -61,10 +61,10 @@ public class HBoxTest extends HBox {
                     e.printStackTrace();
                 }
                 String chaine = "";
-                for( int i = 0; i<scenario.getVendeurs().size();i++){
-                    chaine = chaine + scenario.getVendeurs().get(i) + " -> " + scenario.getAcheteurs().get(i)
-                            + " | "+membres.getListe().get(scenario.getVendeurs().get(i))+ " -> " +membres.getListe().get(scenario.getAcheteurs().get(i))
-                            +" : "+ carte.getDistance()[carte.getVillesIndicés().get(membres.getListe().get(scenario.getVendeurs().get(i)))][carte.getVillesIndicés().get(membres.getListe().get(scenario.getAcheteurs().get(i)))]
+                for(int i = 0; i<scenario.getAllVendeurs().size(); i++){
+                    chaine = chaine + scenario.getAllVendeurs().get(i) + " -> " + scenario.getAllAcheteurs().get(i)
+                            + " | "+membres.getListe().get(scenario.getAllVendeurs().get(i))+ " -> " +membres.getListe().get(scenario.getAllAcheteurs().get(i))
+                            +" : "+ carte.getDistance()[carte.getVillesIndicés().get(membres.getListe().get(scenario.getAllVendeurs().get(i)))][carte.getVillesIndicés().get(membres.getListe().get(scenario.getAllAcheteurs().get(i)))]
                             +" km "+"\n";
                 }
                 txt2.setText(chaine);

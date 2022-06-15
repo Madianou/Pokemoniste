@@ -1,7 +1,59 @@
 .root{
     -fx-padding: 10;
-    -fx-background-color: white;
+    -fx-background-color: #0F41AD;
+}
+.scene{
+    -fx-background-color : #0F41AD;
+}
+.stage{
+    -fx-background-color : #0F41AD;
 }
 #opaque{
-    -fx-background-color: white;
+    -fx-background-color: #0F41AD;
+}
+.scroll-pane{
+    -fx-background: #FFDE2D;
+    -fx-border-color: red;
+}
+.toggle-button{
+    -fx-background-color: #FFDE2D;
+    -fx-text-fill: black;
+    -fx-font-size: 1.4em;
+}
+.toggle-button:selected{
+    -fx-background-color:  red;
+}
+.toggle-button:hover{
+    -fx-background-color: red;
+}
+.label{
+    -fx-font-weight: bold;
+    -fx-font-size: 1.6em;
+}
+.text-area .content{
+    -fx-background-color : #FFDE2D;
+}
+.text-area {
+    -fx-font-weight: bold;
+    -fx-background-color : red;
+    -fx-font-size: 1.4em;
+}
+#bar {
+    -fx-background-color : #FFDE2D;
+    -fx-border-color : red;
+}
+.menu-item {
+    -fx-background-color : #FFDE2D;
+}
+.menu:hover {
+    -fx-border-color : red;
+}
+.menu:selected {
+    -fx-background-color : red;
+}
+.menu-item:hover {
+    -fx-border-color : red;
+}
+.menu-item:selected {
+    -fx-border-color : red;
 }

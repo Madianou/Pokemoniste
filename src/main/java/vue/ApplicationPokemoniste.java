@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class ApplicationPokemoniste extends Application implements ConstantesPokemoniste {
     private static String chUrlScenario = URL_SCENARIO[0];
+    private static Scenario scenario;
 
     public void start (Stage stage) throws IOException {
         System.setProperty("javafx.platform", "desktop");
@@ -23,12 +24,6 @@ public class ApplicationPokemoniste extends Application implements ConstantesPok
         File css = new File("css"+File.separator+"Styles.css");
         scene.getStylesheets().add(css.toURI().toString());
 
-        Scenario scenario = Scenario.lectureScenario(new File(chUrlScenario));
-        Carte carte = new Carte();
-        Membres membres = new Membres();
-        GrapheOriente test = new GrapheOriente(scenario,carte,membres);
-        System.out.println(test);
-
         stage.setScene(scene);
         stage.setTitle("Pokemoniste");
         stage.show();
@@ -37,11 +32,14 @@ public class ApplicationPokemoniste extends Application implements ConstantesPok
     public static void main(String[] args) {
         ApplicationPokemoniste.launch(args);
     }
-    public static void setUrlScenario(int indice){
-        String url = URL_SCENARIO[indice];
+    public static void setUrlScenario(String url){
         chUrlScenario = url;
+        System.out.println(url);
     }
-    public static String getScenario(){
+    public static String getUrlScenario(){
         return chUrlScenario;
+    }
+    public static Scenario getScenario(){
+        return scenario;
     }
 }

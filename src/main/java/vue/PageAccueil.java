@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.Controleur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -9,24 +10,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import modele.ConstantesPokemoniste;
 
 import java.io.File;
 import java.net.URL;
 
-public class PageAccueil extends VBox {
+public class PageAccueil extends VBox implements ConstantesPokemoniste {
     private static Image chImage;
     private static Button chBouton;
 
     public PageAccueil(){
-        this.setSpacing(10);
+        this.setSpacing(ESPACEMENT);
+        Controleur controleur = VBoxRoot.getControleur();
 
-        HBox boxPokemon = new HBox(10);
-        HBox boxBouton = new HBox(10);
+        HBox boxPokemon = new HBox();
+        HBox boxBouton = new HBox();
 
         final ImageView imageView = new ImageView();
 
         String url = new File("images/Pokemoniste.png").toURI().toString();
-        //Il faut changer le chemin pour pouvoir accéder à l'image.
 
         chImage = new Image(url);
         imageView.setImage(chImage);
@@ -35,6 +37,8 @@ public class PageAccueil extends VBox {
         boxPokemon.getChildren().add(imageView);
 
         chBouton = new Button("Accéder à l'application");
+        chBouton.setId("Accueil");
+        chBouton.setOnAction(controleur);
 
         boxBouton.setAlignment(Pos.CENTER);
         boxBouton.setHgrow(chBouton, Priority.ALWAYS);
