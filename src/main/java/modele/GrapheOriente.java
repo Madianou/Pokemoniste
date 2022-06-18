@@ -194,10 +194,9 @@ public class GrapheOriente {
             Fait un parcours de source en source et retourne qu'une seule solution ( pas forcément la meilleure ).
             L'algorithme avance de source en source en "éliminant" les sources utilisés au fur à mesure en dimininuant les degrés entrant des sommets pour créer de nouvelles sources
          **/
-
         Integer dist = 0;
-        List<Integer> sourceTemp = source;
-        Map<Integer,Integer> degréE =  degréEntrant;
+        List<Integer> sourceTemp = new ArrayList<>(source);
+        Map<Integer,Integer> degréE = new HashMap<>( degréEntrant);
         Deque file = new ArrayDeque(sourceTemp);
         List<Integer> chemin = new ArrayList<>();
         Integer origine = sourceTemp.remove(0);
@@ -230,11 +229,13 @@ public class GrapheOriente {
 
 
 
-    public List<List<Integer>> sourceComplet(Integer origine,List<List<Integer>> chemins,List<Integer> source,Map<Integer,Integer> degréEntrant,Carte carte,Integer dist){
+    public List<List<Integer>> sourceComplet(Integer origine,List<List<Integer>> chemins,List<Integer> cheminPred,List<Integer> source,Map<Integer,Integer> degréEntrant,Carte carte){
 
         if (!source.isEmpty()) {
             if (source.size()>1){
                 for (Integer s : source){
+
+                    List <Integer> cheminPredTemp = new ArrayList<>(cheminPred);
                     List <Integer> sourceTemp = new ArrayList<>(source);
                     HashMap<Integer, Integer> degreE = new HashMap<Integer,Integer>(degréEntrant);
                     sourceTemp.remove(s);
@@ -245,47 +246,54 @@ public class GrapheOriente {
                         if (degreE.get(v) == 0){
                             sourceTemp.add(v);
                         }
-                        dist = carte.getDistance()[28][s];
                     }
-                    sourceComplet(s,chemins,sourceTemp,degreE,carte,dist);
+                    if (origine == 28) {
+                        cheminPredTemp.add(origine);
+                    }
+                    cheminPredTemp.add(s);
+                    sourceComplet(s,chemins,cheminPredTemp,sourceTemp,degreE,carte);
                 }
             }
             else{
+                List <Integer> cheminPredTemp = new ArrayList<>(cheminPred);
+                if (origine == 28) {
+                    cheminPredTemp.add(origine);
+                }
+                Deque <Integer> sourceTemp = new ArrayDeque<>(source);
+                HashMap<Integer, Integer> degréE = new HashMap<Integer,Integer>(degréEntrant);
 
-                List<Integer> sourceTemp = source;
-                Map<Integer,Integer> degréE =  degréEntrant;
-                Integer debut = sourceTemp.get(0);
-                List<Integer> chemin = new ArrayList<>();
-                chemin.add(debut);
-                Deque file = new ArrayDeque(sourceTemp);
-                dist+= carte.getDistance()[origine][debut];
-
-                System.out.println(dist);
-
-
-                while(!file.isEmpty()){
-                    Integer courant = (Integer) file.removeFirst();
-                    chemin.add(courant);
+                while(sourceTemp.size()==1) {
+                    Integer courant = sourceTemp.removeFirst();
+                    cheminPredTemp.add(courant);
                     Iterator iterator = adjacence.get(courant).iterator();
-                    while(iterator.hasNext()){  /** On diminue les degrés entrants de tous les voisins de courant car on "l'élimine" du graphe **/
+                    while (iterator.hasNext()) {  /** On diminue les degrés entrants de tous les voisins de courant car on "l'élimine" du graphe **/
                         Integer v = (Integer) iterator.next();
-                        degréE.put(v,degréE.get(v)-1);
-                        if (degréE.get(v) == 0){  /** On trouve une nouvelle source et on l'ajoute dans la file **/
-                            dist+= carte.getDistance()[courant][v];
-                            file.addLast(v);
+                        degréE.put(v, degréE.get(v) - 1);
+                        if (degréE.get(v) == 0) {  /** On trouve une nouvelle source et on l'ajoute dans la file **/
+
+                            sourceTemp.addLast(v);
                         }
                     }
-                    if (file.isEmpty()){
-                        dist +=  carte.getDistance()[28][courant];
-                    }
                 }
-                chemin.add(dist);
-                chemins.add(chemin);
+                if (sourceTemp.isEmpty()){
+                    cheminPredTemp.add(28);
+                    chemins.add(cheminPredTemp);
+                }
+                else{
+                    sourceComplet(cheminPredTemp.get(cheminPredTemp.size()-1),chemins,cheminPredTemp,new ArrayList<>(sourceTemp),degréE,carte);
+                }
             }
-
         }
-
         return chemins;
+    }
+
+
+    public static Integer CalculDistanceChemin (List <Integer> chemin,Carte carte){
+        Integer dist = 0;
+        for (int i = 0 ; i < chemin.size() - 1; i++){
+            dist += carte.getDistance()[chemin.get(i)][chemin.get(i+1)];
+        }
+        return  dist;
     }
 
 

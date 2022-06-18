@@ -26,7 +26,7 @@ public class HelloApplication extends Application {
         System.out.println(test);
         //test.parcoursLargeurTotalComplet(carte);
         //System.out.println(test.PlusCourtChemin(0,23,carte));
-        System.out.println(test.sourceComplet(28,new ArrayList<List<Integer>>(),test.getSource(),test.getDegreEntrant(),carte,0));
+        //System.out.println(test.sourceComplet(28,new ArrayList<List<Integer>>(),test.getSource(),test.getDegreEntrant(),carte,0));
 
         VBoxRoot root = new VBoxRoot();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
