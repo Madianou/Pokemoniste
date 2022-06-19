@@ -9,7 +9,7 @@ public interface ConstantesPokemoniste {
     final int ESPACEMENT = 10;
     final int TAILLE_POINT = 5;
     final int LARGEUR = 1200;
-    final int HAUTEUR = 600;
+    final int HAUTEUR = 642;
     final String ACHETEUR = "Les acheteurs sont : " + "\n" + "\n";
     final String VENDEUR = "Les vendeurs sont : " + "\n" + "\n";
     final String MEMBRE = "Les membres sont : " + "\n" + "\n";

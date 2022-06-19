@@ -87,7 +87,7 @@ public class PageFrance extends HBox implements ConstantesPokemoniste {
             mapView.addLayer(mapLayer);
         }
         MapPoint mapPoint = new MapPoint(47.337710, 1.9);
-        mapView.setZoom((6.1));
+        mapView.setZoom((6));
         mapView.flyTo(0,mapPoint,0.1);
         chMap = mapView;
         VBoxDroite.getChildren().add(chMap);
