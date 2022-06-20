@@ -16,8 +16,8 @@ public class ApplicationPokemoniste extends Application implements ConstantesPok
         System.setProperty("javafx.platform", "desktop");
         System.setProperty("http.agent", "Gluon Mobile/1.0.3");
 
-        VBoxRoot root = new VBoxRoot();
-        //TestGraphe root = new TestGraphe();
+        //VBoxRoot root = new VBoxRoot();
+        TestGraphe root = new TestGraphe();
         root.setSpacing(ESPACEMENT);
 
         Scene scene = new Scene(root,1280, 720);

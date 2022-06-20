@@ -22,12 +22,7 @@ public class TestGraphe extends VBox {
         System.out.println(test.sourceEnSource(test.getSource(),test.getDegreEntrant(),carte));
         //System.out.println(test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant(),carte,0));
         List<List<Integer>> chaine = test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant());
-        System.out.println(chaine.size());
-        System.out.println( "--------------------------------------");
-        for (List<Integer> elem : chaine){
-               System.out.println(GrapheOriente.CalculDistanceChemin(elem,carte));
-        }
-        System.out.println( "--------------------------------------");
-        System.out.println(test.toString());
+
+        System.out.println(GrapheOriente.toStringSourceComplet(chaine,carte));
     }
 }

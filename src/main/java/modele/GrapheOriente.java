@@ -296,6 +296,25 @@ public class GrapheOriente {
                 '}';
     }
 
+    public String toStringSimplifié(){
+        return "sommets=" + sommets + "\n" +
+                "arcs=" + arcs + "\n" +
+                "ordre=" + ordre + "\n" +
+                "taille=" + taille + "\n" ;
+    }
+
+    public static String toStringSourceComplet(List <List<Integer>> chemins,Carte carte){
+        String chaine = "";
+        Integer total = 1;
+        for (List<Integer> elem : chemins){
+            chaine += "Chemin :" + total + "\n"
+                    + elem + "\n"
+                    + "Distance Totale : "+GrapheOriente.CalculDistanceChemin(elem,carte) +"\n";
+            total +=1;
+        }
+        return chaine;
+    }
+
     public List<Integer> getSource() {
         return source;
     }
