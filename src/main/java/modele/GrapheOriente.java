@@ -9,8 +9,8 @@ public class GrapheOriente {
       Graphe orientée décrit par ses sommets, ses arcs et une liste d'adjacence. Les informations sur ses degrés sont également disponibles.
      **/
 
-    private Map<Integer,Sommet> sommets;
-    private List<Arc> arcs;
+    private List<Integer> sommets;
+    private List<List<Integer>> arcs;
     private List<Integer> source;
     private int ordre;
     private int taille;
@@ -18,21 +18,23 @@ public class GrapheOriente {
     private int degréMinS;
     private  int degréMaxE;
     private int degréMinE;
-    private  Map<Integer,ArrayList<Integer>> adjacence;
+    private Map<Integer,ArrayList<Integer>> adjacence;
     private Map<Integer,Integer> degréSortant;
     private Map<Integer,Integer> degréEntrant;
 
 
+    /**
+     * @param scenario liste d'arc de type : vendeurs -> acheteurs
+     * @param carte attribue à chaque villes un indice
+     * @param membre liste de membres avec leurs villes respectives
+     *             Prends en entrée un scénario , une carte et une liste de membres.
+     *             Construit un graphe orienté décrit par ses sommets, ses arcs et une liste d'adjacence. Les informations sur ses degrés sont également disponibles.
+     */
     public GrapheOriente(Scenario scenario,Carte carte,Membres membre){
 
-        /**
-            Prends en entrée un scénario (liste d'arc de type : vendeurs -> acheteurs), une carte qui attribue à chaque villes un indice,
-            et une liste de membres avec leurs villes respectives.
-            Construit un graphe orienté décrit par ses sommets, ses arcs et une liste d'adjacence. Les informations sur ses degrés sont également disponibles.
-         **/
 
-        sommets = new HashMap<>();
-        arcs = new ArrayList<>();
+        sommets = new ArrayList<>();
+        arcs = new ArrayList<List <Integer>>();
         source = new ArrayList<>();
         adjacence = new HashMap<>();
         degréEntrant = new HashMap<>();
@@ -55,32 +57,34 @@ public class GrapheOriente {
 
 
             if (i == 0){ /** Au début on doit ajouter forcément le premier couple de vendeurs acheteurs au graphe **/
-                sommets.put(indiceV, new Sommet(membre.getListe().get(vendeur)));
+                sommets.add(indiceV);
                 adjacence.put(indiceV,new ArrayList<>());
                 degréSortant.put(indiceV,0);
                 degréEntrant.put(indiceV,0);
 
-                sommets.put(indiceA, new Sommet(membre.getListe().get(acheteur)));
+                sommets.add(indiceA);
                 adjacence.put(indiceA, new ArrayList<>());
                 degréEntrant.put(indiceA,0);
                 degréSortant.put(indiceA,0);
             }
             else {   /** On regarde si le vendeur ou l'acheteurs est nouveaux dans le graphe et si oui on l'ajoute **/
-                if (!sommets.keySet().contains(indiceV)) {
-                    sommets.put(indiceV, new Sommet(membre.getListe().get(vendeur)));
+                if (!sommets.contains(indiceV)) {
+                    sommets.add(indiceV);
                     adjacence.put(indiceV,new ArrayList<>());
                     degréSortant.put(indiceV,0);
                     degréEntrant.put(indiceV,0);
                 }
-                if (!sommets.keySet().contains(indiceA)) {
-                    sommets.put(indiceA, new Sommet(membre.getListe().get(acheteur)));
+                if (!sommets.contains(indiceA)) {
+                    sommets.add(indiceA);
                     adjacence.put(indiceA, new ArrayList<>());
                     degréEntrant.put(indiceA,0);
                     degréSortant.put(indiceA,0);
                 }
             }
-
-            arcs.add(new Arc(sommets.get(indiceV),sommets.get(indiceA)));
+            List <Integer> tab =new ArrayList<>();
+            tab.add(indiceV);
+            tab.add(indiceA);
+            arcs.add(tab);
             adjacence.get(indiceV).add(indiceA);
 
 
@@ -167,29 +171,7 @@ public class GrapheOriente {
     }
 
 
-
-    public void parcoursLargeurTotalComplet(Carte carte){
-
-        /** Affiche les parcours en largeur pour toutes les sources du graphe **/
-
-        List source = new ArrayList<Integer>();
-
-        for (Map.Entry<Integer, Integer> mapentry : degréEntrant.entrySet()) {
-            if (mapentry.getValue() == 0){
-                source.add(mapentry.getKey());
-            }
-        }
-        for(Object x: source){
-            HashMap listPredDist = (HashMap) this.parcoursLargeur((Integer) x,carte);
-            System.out.println("Parcours pour "+x);
-            System.out.println(GrapheOriente.parcoursLargeurToString(listPredDist));
-            System.out.println("--------------------------------------------------------");
-            }
-        }
-
-
     public List<Integer> sourceEnSource(List<Integer> source,Map<Integer,Integer> degréEntrant,Carte carte){
-
         /**
             Fait un parcours de source en source et retourne qu'une seule solution ( pas forcément la meilleure ).
             L'algorithme avance de source en source en "éliminant" les sources utilisés au fur à mesure en dimininuant les degrés entrant des sommets pour créer de nouvelles sources
@@ -229,7 +211,7 @@ public class GrapheOriente {
 
 
 
-    public List<List<Integer>> sourceComplet(Integer origine,List<List<Integer>> chemins,List<Integer> cheminPred,List<Integer> source,Map<Integer,Integer> degréEntrant,Carte carte){
+    public List<List<Integer>> sourceComplet(Integer origine,List<List<Integer>> chemins,List<Integer> cheminPred,List<Integer> source,Map<Integer,Integer> degréEntrant){
 
         if (!source.isEmpty()) {
             if (source.size()>1){
@@ -251,7 +233,7 @@ public class GrapheOriente {
                         cheminPredTemp.add(origine);
                     }
                     cheminPredTemp.add(s);
-                    sourceComplet(s,chemins,cheminPredTemp,sourceTemp,degreE,carte);
+                    sourceComplet(s,chemins,cheminPredTemp,sourceTemp,degreE);
                 }
             }
             else{
@@ -280,7 +262,7 @@ public class GrapheOriente {
                     chemins.add(cheminPredTemp);
                 }
                 else{
-                    sourceComplet(cheminPredTemp.get(cheminPredTemp.size()-1),chemins,cheminPredTemp,new ArrayList<>(sourceTemp),degréE,carte);
+                    sourceComplet(cheminPredTemp.get(cheminPredTemp.size()-1),chemins,cheminPredTemp,new ArrayList<>(sourceTemp),degréE);
                 }
             }
         }
@@ -320,5 +302,9 @@ public class GrapheOriente {
 
     public Map<Integer, Integer> getDegreEntrant() {
         return degréEntrant;
+    }
+
+    public List<Integer> getSommets() {
+        return sommets;
     }
 }

@@ -9,22 +9,25 @@ import modele.Scenario;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class TestGraphe extends VBox {
     public  TestGraphe() throws IOException {
         Carte carte = new Carte();
         Membres membres = new Membres();
-        Scenario scenario = Scenario.lectureScenario(new File("src/files/scenario/scenario_2_1.txt"));
+        Scenario scenario = Scenario.lectureScenario(new File("src/main/test/ressource/scenario_test"));
         GrapheOriente test = new GrapheOriente(scenario, carte, membres);
+        System.out.println(GrapheOriente.parcoursLargeurToString((HashMap<Integer, int[]>) test.parcoursLargeur(9,carte)));
         System.out.println(test.sourceEnSource(test.getSource(),test.getDegreEntrant(),carte));
         //System.out.println(test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant(),carte,0));
-        List<List<Integer>> chaine = test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant(),carte);
+        List<List<Integer>> chaine = test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant());
         System.out.println(chaine.size());
         System.out.println( "--------------------------------------");
         for (List<Integer> elem : chaine){
                System.out.println(GrapheOriente.CalculDistanceChemin(elem,carte));
         }
         System.out.println( "--------------------------------------");
+        System.out.println(test.toString());
     }
 }

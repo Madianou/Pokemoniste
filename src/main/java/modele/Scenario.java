@@ -56,6 +56,7 @@ public class Scenario {
     public List<String> getAllVendeurs() {
         return allVendeurs;
     }
+
     public List<String> getVendeursListe(){
         for (String vendeur : allVendeurs){
             if (vendeurs.contains(vendeur)){
@@ -83,6 +84,7 @@ public class Scenario {
     public List<String> getAllAcheteurs() {
         return allAcheteurs;
     }
+
     public List<String> getAcheteursListe(){
         for (String acheteur : allAcheteurs){
             if (acheteurs.contains(acheteur)){
