@@ -14,7 +14,7 @@ public class Controleur implements EventHandler, ConstantesPokemoniste {
 
     @Override
     public void handle(Event event) {
-        PagePrésentation presentation = VBoxRoot.getPresetation();
+        PagePrésentation presentation = VBoxRoot.getPresentation();
         PageMembre membre = VBoxRoot.getMembre();
         PageFrance france = VBoxRoot.getFrance();
         PageAccueil accueil = VBoxRoot.getAccueil();
