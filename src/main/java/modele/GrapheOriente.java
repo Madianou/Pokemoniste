@@ -278,6 +278,25 @@ public class GrapheOriente {
         return  dist;
     }
 
+    public static String BestChemin (List<List<Integer>> chemins,Carte carte){
+        String chaine = "";
+        Integer total = 1;
+        Integer minDist = GrapheOriente.CalculDistanceChemin(chemins.get(0),carte);
+        List<Integer> chemin = chemins.get(0);
+        for (List<Integer> elem : chemins){
+            Integer dist = GrapheOriente.CalculDistanceChemin(elem,carte);
+            if (dist< minDist){
+                minDist = dist;
+                chemin = elem;
+            }
+            total +=1;
+        }
+        chaine = "Meilleur Chemin : " + total + "\n"
+                + chemin + "\n"
+                + "Distance Totale : "+ minDist +"\n";
+        return chaine;
+    }
+
 
     @Override
     public String toString() {

@@ -23,6 +23,6 @@ public class TestGraphe extends VBox {
         //System.out.println(test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant(),carte,0));
         List<List<Integer>> chaine = test.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),test.getSource(),test.getDegreEntrant());
 
-        System.out.println(GrapheOriente.toStringSourceComplet(chaine,carte));
+        System.out.println(GrapheOriente.BestChemin(chaine,carte));
     }
 }
