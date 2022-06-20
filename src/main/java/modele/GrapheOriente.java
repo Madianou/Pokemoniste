@@ -293,7 +293,7 @@ public class GrapheOriente {
         }
         chaine = "Meilleur Chemin : " + total + "\n"
                 + chemin + "\n"
-                + "Distance Totale : "+ minDist +"\n";
+                + "Distance Totale : "+ minDist + " km" + "\n";
         return chaine;
     }
 
