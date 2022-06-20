@@ -17,7 +17,6 @@ import java.util.List;
 
 public class PagePrésentation extends HBox implements ConstantesPokemoniste {
     private static TextArea chCheminBref;
-    private static TextArea chMembre;
     private static TextArea chChemin;
     private static Button chBouton;
     private static String chUrlScenario = URL_SCENARIO[0];
@@ -42,9 +41,8 @@ public class PagePrésentation extends HBox implements ConstantesPokemoniste {
 
         chCheminBref = new TextArea();
         chCheminBref.setText(graphe.BestChemin(chaine, carte));
-        chMembre = new TextArea();
 
-        VBoxGauche.getChildren().addAll(chCheminBref, chMembre);
+        VBoxGauche.getChildren().addAll(chCheminBref);
 
         chChemin = new TextArea();
         chChemin.setText(graphe.toStringSimplifié());
