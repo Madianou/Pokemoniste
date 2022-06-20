@@ -4,18 +4,19 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import modele.Carte;
-import modele.ConstantesPokemoniste;
-import modele.GrapheOriente;
-import modele.Membres;
+import modele.*;
 import vue.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Controleur implements EventHandler, ConstantesPokemoniste {
     private static String chUrlScenario = URL_SCENARIO[0];
+    private Map<String,List<List<Integer>>> chParcoursComplet = new HashMap<>();
 
     @Override
     public void handle(Event event) {
@@ -41,12 +42,23 @@ public class Controleur implements EventHandler, ConstantesPokemoniste {
             membre.setMembres(presentation.getScenario().getMembresString(), presentation.getScenario().getAcheteursString(), presentation.getScenario().getVendeursString());
 
             GrapheOriente graphe = new GrapheOriente(presentation.getScenario(), carte, membres);
-            List<List<Integer>> chaine = graphe.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),graphe.getSource(),graphe.getDegreEntrant());
+            //List<List<Integer>> chaine = graphe.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),graphe.getSource(),graphe.getDegreEntrant());
             presentation.setTextChemin(graphe.toStringSimplifié());
-            presentation.setTextCheminBref(graphe.BestChemin(chaine, carte));
+            presentation.setTextCheminBref(graphe.BestChemin(chParcoursComplet.get(chUrlScenario), carte));
         }
         if (event.getSource() instanceof Button){
             if (((Button) event.getSource()).getId().equals("Accueil")){
+                for (String elem : URL_SCENARIO){
+                    GrapheOriente graphe = null;
+
+                    try {
+                        graphe = new GrapheOriente(Scenario.lectureScenario(new File(elem)),new Carte(), new Membres());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    List<List<Integer>> chaine = graphe.sourceComplet(28,new ArrayList<List<Integer>>(),new ArrayList<Integer>(),graphe.getSource(),graphe.getDegreEntrant());
+                    chParcoursComplet.put(elem,chaine);
+                }
                 VBoxRoot.removeAccueil();
             }
             if (((Button) event.getSource()).getId().equals("France")){
